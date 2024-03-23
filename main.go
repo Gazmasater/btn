@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"uslugio.com/USLUGIO/authdata"
+	"uslugio.com/USLUGIO/fileio"
 	"uslugio.com/USLUGIO/webdriver"
 	"uslugio.com/USLUGIO/webdriver_utils"
 )
@@ -46,8 +47,22 @@ func main() {
 
 	fmt.Println("Успешно вошли в систему")
 
-	// Нажатие на кнопку Up
-	if err := webdriver_utils.ClickButton(wd, ".up_date-76722", "Up"); err != nil {
-		log.Fatalf("%s", err)
+	filePath := "/home/master/Нажатие кнопок сайта/USLUGIO/button_storage/uslugio/lew_list.json"
+	buttons, err := fileio.ReadButtonsFromFile(filePath)
+	if err != nil {
+		log.Fatalf("ошибка при чтении файла кнопок: %s", err)
 	}
+
+	for _, button := range buttons {
+		time.Sleep(2 * time.Second) // Пауза между нажатиями кнопок
+
+		// Нажатие на кнопку
+		err := webdriver_utils.ClickButton(wd, button.Selector, button.Name)
+		if err != nil {
+			// Если кнопка не найдена, записать в лог и продолжить выполнение цикла
+			log.Printf("Ошибка при нажатии кнопки %s: %s", button.Name, err)
+			continue
+		}
+	}
+
 }
