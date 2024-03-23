@@ -6,35 +6,15 @@ import (
 	"time"
 
 	"github.com/tebeka/selenium"
-	"github.com/tebeka/selenium/chrome"
+	"uslugio.com/USLUGIO/authdata"
+	"uslugio.com/USLUGIO/webdriver"
 )
 
 func main() {
 	// Путь к ChromeDriver
-	const (
-		seleniumPath = "/home/master/chromedriver_linux64/chromedriver"
-		port         = 4444
-	)
-
-	// Запуск Selenium WebDriver
-	opts := []selenium.ServiceOption{}
-	service, err := selenium.NewChromeDriverService(seleniumPath, port, opts...)
+	wd, err := webdriver.StartWebDriver()
 	if err != nil {
-		log.Fatalf("Ошибка при запуске Chrome WebDriver: %s", err)
-	}
-	defer service.Stop()
-
-	// Настройка ChromeOptions
-	caps := selenium.Capabilities{"browserName": "chrome"}
-	chromeCaps := chrome.Capabilities{
-		Path: "",
-	}
-	caps.AddChrome(chromeCaps)
-
-	// Создание удаленного драйвера
-	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", port))
-	if err != nil {
-		log.Fatalf("Ошибка при создании удаленного драйвера: %s", err)
+		log.Fatalf("ошибка при запуске WebDriver: %s", err)
 	}
 	defer wd.Quit()
 
@@ -46,12 +26,15 @@ func main() {
 	// Ждем, пока страница загрузится
 	time.Sleep(1 * time.Second)
 
+	// Получение логина и пароля из пакета login
+	user := authdata.GetUserCredentials()
+
 	// Поиск поля для ввода логина и ввод логина
 	loginInput, err := wd.FindElement(selenium.ByCSSSelector, "input[name='email']")
 	if err != nil {
 		log.Fatalf("Ошибка при поиске поля для ввода логина: %s", err)
 	}
-	if err := loginInput.SendKeys("lew1968@list.ru"); err != nil {
+	if err := loginInput.SendKeys(user.Email); err != nil {
 		log.Fatalf("Ошибка при вводе логина: %s", err)
 	}
 
@@ -60,7 +43,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Ошибка при поиске поля для ввода пароля: %s", err)
 	}
-	if err := passwordInput.SendKeys("Gazmasterpro358"); err != nil {
+	if err := passwordInput.SendKeys(user.Password); err != nil {
 		log.Fatalf("Ошибка при вводе пароля: %s", err)
 	}
 
