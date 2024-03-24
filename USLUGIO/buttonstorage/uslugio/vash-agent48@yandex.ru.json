@@ -1,18 +1,8 @@
 [
-{
-    "selector": ".up_date-591702", "name": "Up"
-},
-{
-    "selector": ".up_date-416272", "name": "Up"
-},
-
-{
-    "selector": ".up_date-245206", "name": "Up"
-},
-
-{
-    "selector": ".up_date-242714", "name": "Up"
-}
+{ "selector": ".up_date-591702", "name": "Up"},
+{"selector": ".up_date-416272", "name": "Up"},
+{"selector": ".up_date-245206", "name": "Up"},
+{"selector": ".up_date-242714", "name": "Up"}
 
 ]
 

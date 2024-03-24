@@ -5,15 +5,11 @@ import (
 	"log"
 	"time"
 
+	"uslugio.com/USLUGIO/buttonstorage"
 	"uslugio.com/USLUGIO/fileio"
 	"uslugio.com/USLUGIO/webdriver"
 	"uslugio.com/USLUGIO/webdriver_utils"
 )
-
-// type Credentials struct {
-// 	Login    string `json:"login"`
-// 	Password string `json:"password"`
-// }
 
 func main() {
 	// Путь к ChromeDriver
@@ -45,7 +41,6 @@ func main() {
 	}
 
 	for _, cred := range credentials {
-		fmt.Printf("Логин1: %s, Пароль1: %s\n", cred.Login, cred.Password)
 
 		// Ввод логина
 		if err := webdriver_utils.InputText(wd, "input[name='email']", cred.Login, "логина"); err != nil {
@@ -88,12 +83,11 @@ func main() {
 
 		time.Sleep(2 * time.Second)
 
-		// Нажатие на кнопку "ГАЗлайф"
-		err = webdriver_utils.ClickButton(wd, "a.dropdown-toggle.btn.btn-link", "ГАЗлайф")
+		err = webdriver_utils.ClickButton(wd, "a.dropdown-toggle.btn.btn-link", buttonstorage.LoginMap[cred.Login])
 		if err != nil {
-			log.Fatalf("Ошибка при нажатии кнопки 'ГАЗлайф': %s", err)
+			log.Fatalf("Ошибка при нажатии кнопки loginMap[cred.Login]: %s", err)
 		} else {
-			fmt.Println("Кнопка 'ГАЗлайф' успешно нажата")
+			fmt.Println("Кнопка  успешно нажата", buttonstorage.LoginMap[cred.Login])
 		}
 
 		time.Sleep(2 * time.Second)
