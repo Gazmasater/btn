@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	seleniumPath = "/home/master/chromedriver_linux64/chromedriver"
+	seleniumPath = "/usr/local/bin/chromedriver"
 	port         = 4444
 )
 
