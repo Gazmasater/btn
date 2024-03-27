@@ -35,7 +35,6 @@ func main() {
 		return
 	}
 
-	fmt.Println("Успешно прочитаны учетные данные:")
 	for _, cred := range credentials {
 		fmt.Printf("Логин: %s, Пароль: %s\n", cred.Login, cred.Password)
 	}
@@ -57,10 +56,6 @@ func main() {
 			log.Fatalf("%s", err)
 		}
 
-		fmt.Println("Успешно вошли в систему")
-
-		fmt.Printf("Логин: %s, Пароль: %s\n", cred.Login, cred.Password)
-
 		// Определение пути к файлу кнопок в зависимости от пары авторизации
 		buttonFilePath := fmt.Sprintf("USLUGIO/buttonstorage/uslugio/%s.json", cred.Login)
 		println("buttonFilePath", buttonFilePath)
@@ -81,7 +76,7 @@ func main() {
 			}
 		}
 
-		time.Sleep(2 * time.Second)
+		time.Sleep(1 * time.Second)
 
 		err = webdriver_utils.ClickButton(wd, "a.dropdown-toggle.btn.btn-link", buttonstorage.LoginMap[cred.Login])
 		if err != nil {
@@ -90,7 +85,7 @@ func main() {
 			fmt.Println("Кнопка  успешно нажата", buttonstorage.LoginMap[cred.Login])
 		}
 
-		time.Sleep(2 * time.Second)
+		time.Sleep(1 * time.Second)
 
 		// Нажатие на кнопку "Выход"
 		if err := webdriver_utils.ClickButton(wd, "a[href*='logout']", "Выход"); err != nil {
