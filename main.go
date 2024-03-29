@@ -35,10 +35,6 @@ func main() {
 		return
 	}
 
-	// for _, cred := range credentials {
-	// fmt.Printf("Логин: %s, Пароль: %s\n", cred.Login, cred.Password)
-	// }
-
 	for _, cred := range credentials {
 
 		// Ввод логина
