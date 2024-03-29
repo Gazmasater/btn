@@ -1,7 +1,10 @@
 [
     { "selector": ".up_date-1111641", "name": "Up"},
     { "selector": ".up_date-985047", "name": "Up"},
-    { "selector": ".up_date-985050", "name": "Up"}
+    { "selector": ".up_date-985050", "name": "Up"},
+    { "selector": ".up_date-985048", "name": "Up"},
+    { "selector": ".up_date-985049", "name": "Up"}
+
 
 ]
 
