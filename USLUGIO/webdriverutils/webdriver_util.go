@@ -1,5 +1,5 @@
 // Package webdriverutils предоставляет утилиты для работы с веб-драйвером.
-package webdriver_utils
+package webdriverutils
 
 import (
 	"fmt"

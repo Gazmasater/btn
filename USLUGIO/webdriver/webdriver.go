@@ -23,6 +23,10 @@ func StartWebDriver() (selenium.WebDriver, error) {
 	caps := selenium.Capabilities{"browserName": "chrome"}
 	chromeCaps := chrome.Capabilities{
 		Path: "",
+		Args: []string{
+			// Устанавливаем режим headless
+			"--headless",
+		},
 	}
 	caps.AddChrome(chromeCaps)
 
