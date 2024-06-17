@@ -38,9 +38,7 @@ func main() {
 		fmt.Printf("Ошибка: %s\n", err)
 		return
 	}
-
 	for _, cred := range credentials {
-
 		// Ввод логина
 		if err := webdriverutils.InputText(wd, "input[name='email']", cred.Login, "логина"); err != nil {
 			log.Fatalf("%s", err)
@@ -93,5 +91,4 @@ func main() {
 
 		fmt.Println("Кнопка 'Выход' успешно нажата")
 	}
-
 }
